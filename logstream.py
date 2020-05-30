@@ -7,10 +7,10 @@ subreddit = reddit.subreddit(config.sub)
 
 
 for log in reddit.subreddit("mod").mod.log(limit=1000):
-    if log.mod.name in config.name:
+    if log.mod.name in config.name and if
         print("Mod: {}, Action: {}, Link: {}".format(log.mod, log.action, log.target_permalink))
 
     if log.mod.name not in config.name:
-        print("Not Found")
+        continue
 
 subreddit = reddit.subreddit(config.sub)
