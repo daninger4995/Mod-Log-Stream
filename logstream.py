@@ -12,6 +12,3 @@ for log in reddit.subreddit("mod").mod.log(limit=100):
     if log.mod.name not in config.name:
         continue
 
-
-client.run(config.discord_id)
-
