@@ -1,7 +1,6 @@
 import config
 
 import praw
-
 reddit = praw.Reddit(username = config.username,password = config.password,client_id = config.id,client_secret = config.secret,user_agent = config.user_agent)
 subreddit = reddit.subreddit(config.sub)
 

@@ -1,7 +1,10 @@
 import discord
 import config
 import praw
+from discord.ext import commands
 import json
+import datetime
+
 
 class Reddit(commands.Cog):
 
@@ -12,8 +15,6 @@ class Reddit(commands.Cog):
         self.channel_id = config.channel_id
         self.subreddit = config.sub
         self.timer = 5
-
-def main():
 
     bot = discord.Client()
 
@@ -32,13 +33,13 @@ def main():
                 latest_log_id = json.loads(file.read())['log.id']
 
             # If the submission is new, send it
-            subreddit = self.reddit.subreddit(self.subreddit)
+            subreddit = self.reddit.subreddit(config.sub)
             for log in reddit.subreddit("mod").mod.log(limit=1):
                 if log.id != latest_log_id and submission != None:
                     self.store_latest_log_id(log.id)
                     await self.post_log(log)
 
-    async def post_log(self, log)
+    async def post_log(self, log):
         channel = self.bot.get_channel(self.channel_id)
 
         embed = self.create_embed(log)
@@ -57,10 +58,10 @@ def main():
         data = {
             'color': 0x7fff00,
             'title': {log.action},
-            'url': {'url': f'https://www.old.reddit.com{log.target_permalink},
             'author': {'Mod': f'/u/{log.mod}'},
-            'timestamp': datetime.datetime.utcnow().isoformat(),
+            'timestamp': datetime.datetime.utcnow().isoformat()
         }
-    bot.run(config.discord_id)
 
-main()
+        data['url'] = f'https://www.old.reddit.com{log.target_permalink}'
+
+        return discord.Embed.from_dict(data)
