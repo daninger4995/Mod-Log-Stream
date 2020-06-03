@@ -42,7 +42,7 @@ class Reddit(commands.Cog):
                     embed.set_footer(text="Contact daninger4995 for any questions")
                     embed = discord.Embed(title=f"{log.action}", description=f"Moderator: /u/{log.mod}", color=0xeee657,)
 
-                    embed.add_field(name="Permalink", value="https://www.reddit.com/r/{log.target_permalink}")
+                    embed.add_field(name="Permalink", value=f"https://www.reddit.com{log.target_permalink}")
                     embed.add_field(name="OP Username", value=log.target_author)
                     channel = self.bot.get_channel(self.channel_id)
                     await channel.send(embed=embed)
